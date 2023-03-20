@@ -1,0 +1,23 @@
+@startuml
+
+!theme cerulean-outline
+
+title "Messages - Sequence Diagram"
+
+actor User
+boundary "Firewall" as FW
+boundary "Login" as Login
+boundary "Web GUI" as GUI
+control "Shopping Cart" as SC
+entity Widget
+database Widgets
+
+User -> GUI : To Website
+GUI -> SC : To control
+SC -> Widget : To entity
+FW <- Widget : Not logged in
+FW -> Login : proceed to login
+Login -> Widget : return to widget
+Widget -> Widgets : To database
+
+@enduml
